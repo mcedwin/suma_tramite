@@ -1,0 +1,60 @@
+<div id="page-wrapper" class="page-filter">
+	<div class="page-header col-md-12">
+		<div class="row page-header-title">
+			<div class="col-sm-6">
+				<h3>Estadística - Documentos externos</h3></div>
+			
+		</div>
+		<div class="row page-header-content">
+			<div class="onsel form-inline col-xs-12 hidden">
+				<a class="btn btn-default btn-sm borrar" href="<?=base_url() ?>oficina/borrar">
+					<i class="fa fa-trash fa-fw"></i>
+					Borrar
+				</a>
+			</div>
+			<div class="nosel">
+				<div class="col-sm-9">
+					<form class="tform form-inline" >
+						<div class="col-md-2">
+							<label>AÑO</label>
+							<?php
+							echo form_dropdown('anio', $anio,'',array('class' => 'form-control'));?>
+					
+			               <!--  <select class="form-control" name="anio">
+			                	<option value="2015">2015</option>
+			                	<option value="2016">2016</option>
+			                	<option value="2016">2017</option>
+			                </select> -->
+						</div>
+		                <div class="col-md-7">
+		                	<label>OFICINA</label>
+		                	<select class="form-control" name="oficina">
+		                		<option value="">todas las oficinas</option>
+		                		<?php
+		                		foreach ($oficina as $value) {
+		                			
+		                		?>
+		                	    <option value="<?=$value->ofic_id?>"><?=$value->ofic_nombre?></option>
+		                	    <?php
+		                	    }
+		                	    ?>
+		                	</select>
+		                </div>
+						<div class="col-md-3">
+							<button type="submit" class="btn btn-default">
+								Generar
+							</button>
+						</div>
+					</form>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	<div class="page-content">
+		<br>
+		<div class="cuerpo">
+			
+		</div>
+	</div>
+</div>

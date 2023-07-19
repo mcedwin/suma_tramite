@@ -1,0 +1,37 @@
+poner unico expe_codigo y peridoo}
+
+agregar codigo a oficina
+agregar codigo a documento
+agregar flag para interno en documento
+agregar flag para externo en documento
+
+agregar codigo a usuario
+
+agregar expe_interno_tipo encum
+
+agregar usua_cargo
+
+
+agregar dialgo al guardar expediente que muestre informacion del expediente
+
+mostrar en pantalla al guardar expediente
+
+
+documento interno sale a externo y ahi queda
+marcar tipo de documento si es con salida externa
+
+
+revisar notificaciones
+
+
+
+
+referencia
+y luego datos adicionales
+
+aparezca responsable en la interfaz
+
+como firma para documnentado interno personalk
+
+
+todo configurado

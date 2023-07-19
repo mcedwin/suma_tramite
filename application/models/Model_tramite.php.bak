@@ -1,0 +1,52 @@
+<?php 
+  class Model_tramite extends CI_Model{
+    public function __construct(){
+      parent::__construct();
+            $this->load->database();
+    }
+    function getTramite($id=0){
+      if($id!=0){
+        $this->db->where($id);
+        $consulta=$this->db->get('tramite');
+
+        if($consulta->num_rows()> 0){
+
+          $consulta = $consulta->row();
+         
+          return $consulta;
+        }
+        else{ 
+          return FALSE;
+         
+        }
+      }else{
+        $this->db->select("*");
+        $this->db->from("tramite");
+        $consulta=$this->db->get();
+        if($consulta->num_rows()> 0){
+          return $consulta->result();
+        }
+        else{ 
+          return FALSE;
+        }
+      }
+    }
+    function expediente_tramites($where){
+      $this->db->select("of1.ofic_nombre as origen,of2.ofic_nombre as destino,tr.tram_fechareg,tr.tram_fechaestado,tr.tram_observacion,tr.tram_estado");
+      $this->db->from('expediente ex');
+      $this->db->join('tramite tr', 'ex.expe_id = tr.tram_expe_id');
+      $this->db->join('oficina of1', 'of1.ofic_id = tr.tram_ofic_ini');
+      $this->db->join('oficina of2', 'of2.ofic_id = tr.tram_ofic_fin');
+      //$this->db->order_by("tr.tram_id", "asc");
+      $this->db->where($where);
+      $consulta = $this->db->get(); 
+      if($consulta->num_rows()> 0){
+
+       return $consulta->result();
+        
+      }
+      else{ 
+        return FALSE;
+      }
+    }
+}
