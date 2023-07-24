@@ -23,7 +23,7 @@
 						<div class="col-sm-6">
 							<div class="form-group">
 								<label class="col-sm-6"><strong>Nº de expediente</strong></label>
-								<span><?php echo $expediente->expe_id ?></span>
+								<span><?php echo $expediente->expe_codigo.'-'.$expediente->expe_periodo ?></span>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-6"><strong>Tipo de expediente</strong></label>

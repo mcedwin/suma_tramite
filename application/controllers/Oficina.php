@@ -26,6 +26,11 @@ class Oficina extends MY_Controller {
 		$excel = isset($_GET['excel']) ? $_GET['excel'] : false;
 		$columns = array(
 			array('db' => 'ofic_nombre', 'dt' => 'Nombre','field'=>"ofic_nombre"),
+			array('db' => 'ofic_estado', 'dt' => 'Activo', "field" => 'ofic_estado', 'formatter' => function ($d, $row) {
+				if ($d == 1)
+					return "SI";
+				return "NO";
+			}),
 			array('db' => 'ofic_codigo', 'dt' => 'Código','field'=>"ofic_codigo"),
 			array('db' => 'ofic_id', 'dt' => 'DT_RowId','field'=>"ofic_id")
 		);
@@ -131,8 +136,9 @@ function exportarXLS($titulo, $termino, $fecha, $json) {
 		
 		$nombre = $this->input->post('nombre');
 		$codigo = $this->input->post('codigo');
+		$habilitado = isset($_POST['habilitado']) ? '1' : '0';
 		
-		$datos = array("ofic_nombre" => $nombre,'ofic_codigo'=>$codigo);
+		$datos = array("ofic_nombre" => $nombre,'ofic_codigo'=>$codigo, "ofic_estado" => $habilitado);
 		
 		if(isset($oficina)){
 			if($this->Model_general->guardar_edit_registro("oficina",$datos,array("ofic_id" => $oficina))==TRUE):

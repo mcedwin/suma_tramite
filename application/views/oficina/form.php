@@ -22,7 +22,12 @@
 					<?= form_label('<strong>Código:</strong>', 'codigo', array('class' => 'col-sm-4 control-label')); ?>
 					<div class="col-sm-7"><?= form_input(array("name" => "codigo", "value" => $oficina->ofic_codigo, "class" => "form-control")); ?></div>
 				</div>
-
+				<div class="form-group">
+						<?=form_label('<strong>Habilitado</strong>', 'estado',array('class' => 'col-sm-4 control-label')); ?>
+						<?php if($oficina->ofic_estado==1){$checked=true;}else{$checked=false;}
+						 ?>
+						<div class="col-sm-8"><?=form_checkbox(array('name'=> 'habilitado','value'=>$oficina->ofic_estado,'checked'=> $checked));?></div>
+					</div>	
 
 			</div>
 			<div class="modal-footer">

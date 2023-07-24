@@ -862,7 +862,7 @@ class Expedientes extends MY_Controller
 
 			$body = str_replace(
 				array('[N_EXPEDIENTE]', '[REMITENTE]', '[PERIODO]', '[ASUNTO]', '[FECHA]', '[ESTADO]'),
-				array($expediente, $reg->expe_remitente, $empresa->conf_periodo, $reg->expe_asunto, date("Y/m/d H:i:s"), $estado),
+				array($reg->expe_codigo, $reg->expe_remitente, $empresa->conf_periodo, $reg->expe_asunto, date("Y/m/d H:i:s"), $estado),
 				'<div style="border: solid 1px; padding: 1em; width: 80%;">
 					<div style="display: inline-block; width: 40%;">
 					<div>

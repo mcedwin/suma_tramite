@@ -68,7 +68,7 @@ class Consultar extends MY_Controller {
 		$periodo = $this->input->post('periodo');
 		$ip = $this->input->ip_address();
 
-		$check_expdiente = $this->Model_general->existe(array("expe_id"=>$numero,"expe_periodo"=>$periodo),"expediente");
+		$check_expdiente = $this->Model_general->existe(array("expe_codigo"=>$numero,"expe_periodo"=>$periodo),"expediente");
 
 		$expira = time() - 7200;
 		$this->Model_general->borrar(array("captcha_time <"=>$expira),"captcha");
