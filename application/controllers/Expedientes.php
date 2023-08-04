@@ -2305,11 +2305,11 @@ class Expedientes extends MY_Controller
 	{
 		$add = '1';
 		if ($id > 0) $add = "ofic_id={$id}";
-		$result = $this->db->query("SELECT * FROM oficina WHERE {$add} AND ofic_id!='{$this->full_user->usua_ofic_id}'")->result();
+		$result = $this->db->query("SELECT * FROM oficina WHERE {$add} AND ofic_id!='{$this->full_user->usua_ofic_id}' AND ofic_estado=1")->result();
 
 		$output = [];
 		foreach ($result as $row) {
-			$resultU = $this->db->query("SELECT * FROM usuario WHERE usua_ofic_id='{$row->ofic_id}' ORDER BY usua_responsable DESC, usua_apellidos ASC, usua_nombres ASC")->result();
+			$resultU = $this->db->query("SELECT * FROM usuario WHERE usua_ofic_id='{$row->ofic_id}' and usua_estado=1 ORDER BY usua_responsable DESC, usua_apellidos ASC, usua_nombres ASC")->result();
 			$output[] = ['id' => $row->ofic_id, 'name' => $row->ofic_nombre, 'users' => $resultU];
 		}
 		echo json_encode($output);
