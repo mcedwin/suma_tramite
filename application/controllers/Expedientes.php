@@ -2309,7 +2309,7 @@ class Expedientes extends MY_Controller
 
 		$output = [];
 		foreach ($result as $row) {
-			$resultU = $this->db->query("SELECT * FROM usuario WHERE usua_ofic_id='{$row->ofic_id}' and usua_estado=1 ORDER BY usua_responsable DESC, usua_apellidos ASC, usua_nombres ASC")->result();
+			$resultU = $this->db->query("SELECT usua_id,usua_apellidos,usua_nombres,usua_ofic_id,IF(usua_responsable=0,'','(Responsable)') as responsable FROM usuario WHERE usua_ofic_id='{$row->ofic_id}' and usua_estado='1' ORDER BY usua_responsable DESC, usua_apellidos ASC, usua_nombres ASC")->result();
 			$output[] = ['id' => $row->ofic_id, 'name' => $row->ofic_nombre, 'users' => $resultU];
 		}
 		echo json_encode($output);

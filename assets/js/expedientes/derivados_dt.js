@@ -66,9 +66,9 @@ var seleccionados;
 										
 										html = '';
 										$.each(data, function (oi, oitem) {
-											html += '<option value="0"> + Responsable</option>';
+											html += '';
 											$.each(oitem.users, function (ui, uitem) {
-												html += '<option value="' + uitem.usua_id + '">' + uitem.usua_apellidos + ' ' + uitem.usua_nombres + '</option>'
+												html += '<option value="' + uitem.usua_id + '">' + uitem.usua_apellidos + ' ' + uitem.usua_nombres + ' '+ uitem.responsable  +  '</option>'
 											})
 											html += '<option value="-1">+ Todos los usuarios</option>';
 										})

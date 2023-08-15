@@ -63,12 +63,12 @@ class Cssjs{
 
 	function add_js($filename, $use_path = TRUE, $use_ext = TRUE){
 		if(is_string($filename)):
-			$this->js[] = '<script type="text/javascript" src="'.(($use_path === TRUE) ? $this->path_js : '') . $filename.(($use_ext === TRUE) ? '.js' : '').'"></script>';
+			$this->js[] = '<script type="text/javascript" src="'.(($use_path === TRUE) ? $this->path_js : '') . $filename.(($use_ext === TRUE) ? '.js?v=1' : '').'"></script>';
 			return TRUE;
 		else:
 			if(is_array($filename) && count($filename) > 0):
 			foreach($filename as $fname):
-				$this->js[] = '<script type="text/javascript" src="'.(($use_path===TRUE) ? $this->path_js : '') . $fname.(($use_ext === TRUE) ? '.js' : '').'"></script>';
+				$this->js[] = '<script type="text/javascript" src="'.(($use_path===TRUE) ? $this->path_js : '') . $fname.(($use_ext === TRUE) ? '.js?v=1' : '').'"></script>';
 			endforeach;
 
 				return TRUE;

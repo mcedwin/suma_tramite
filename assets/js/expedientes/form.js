@@ -254,9 +254,9 @@ $(document).ready(function () {
       $.each(data, function (oi, oitem) {
         html += '<tr><input type="hidden" name="tram_ofic_fin[]" value="' + oitem.id + '"><td class="align-middle">' + oitem.name + '</td><td>';
 
-        html += '<select class="form-control" name="tram_user_fin[]"><option value="0"> + Responsable</option>';
+        html += '<select class="form-control" name="tram_user_fin[]">';
         $.each(oitem.users, function (ui, uitem) {
-          html += '<option value="' + uitem.usua_id + '">' + uitem.usua_apellidos + ' ' + uitem.usua_nombres + '</option>'
+          html += '<option value="' + uitem.usua_id + '">' + uitem.usua_apellidos + ' ' + uitem.usua_nombres + ' '+ uitem.responsable  +  '</option>'
         })
         html += '<option value="-1">+ Todos los usuarios</option></select>';
         html += '</td><td>' + $('#clon_acciones').html()
