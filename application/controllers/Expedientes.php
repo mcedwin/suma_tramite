@@ -746,7 +746,10 @@ class Expedientes extends MY_Controller
 			if (move_uploaded_file($archivo, $urlDest . $nom_)) {
 				$datos_expediente = array_merge($datos_expediente, array("expe_archivo" => $date . $nom_));
 			} else {
+				$json['exito'] = false;
 				$json['mensaje'] = "No se pudo enviar el archivo adjunto";
+				echo json_encode($json);
+				exit;
 			}
 		}
 		$expediente = $this->Model_general->guardar_registro("expediente", $datos_expediente);
