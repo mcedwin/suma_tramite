@@ -664,13 +664,13 @@ class Expedientes extends MY_Controller
 
 		$tipo = $this->input->post('tipo');
 		$finExterno = $this->input->post('finExterno');
-		$finExterno = $finExterno == '1'?$finExterno:'0';
+		$finExterno = $finExterno == '1' ? $finExterno : '0';
 
 		$json['exito'] = true;
 		$json['mensaje'] = "";
 
 		if (isset($_POST['tram_ofic_fin'])) {
-			
+
 			foreach ($this->input->post('tram_ofic_fin') as $key => $value) {
 				$this->form_validation->set_rules('tram_ofic_fin[' . $key . ']', 'Oficina ' . ($key + 1), 'required');
 				$this->form_validation->set_rules('acciones[' . $key . ']', 'Accion ' . ($key + 1), 'required');
@@ -754,7 +754,7 @@ class Expedientes extends MY_Controller
 		}
 		$expediente = $this->Model_general->guardar_registro("expediente", $datos_expediente);
 		//die($this->db->last_query());
-		if ($expediente != FALSE) :
+		if ($expediente != FALSE){
 			$oficinas = $this->input->post('tram_ofic_fin');
 			$usuarios = $this->input->post('tram_user_fin');
 			$acciones = $this->input->post('acciones');
@@ -794,8 +794,6 @@ class Expedientes extends MY_Controller
 					}
 				}
 			}
-
-
 /*
 			$this->load->model("Model_empresa");
 			$empresa = $this->Model_empresa->getempresa(array("conf_id" => 1));
@@ -836,10 +834,11 @@ class Expedientes extends MY_Controller
 				endif;
 			endif;
 */
-		else:
+		}
+		else{
 			$json['exito'] = false;
 			$json['mensaje'] = "Error al guardar los datos";
-		endif;
+		}
 		echo json_encode($json);
 	}
 
@@ -915,7 +914,7 @@ class Expedientes extends MY_Controller
 					"addReplyTo" => $empresa->conf_email,
 					"addReplyToName" => $empresa->conf_nombres,
 					"addAddress" => $mails,
-					"Subject" => "Expediente Creado",
+					"Subject" => "Expediente ".$estado,
 					"Body" => $body,
 					"AltBody" => "pruebas de html"
 				);
@@ -926,7 +925,7 @@ class Expedientes extends MY_Controller
 					"addReplyTo" => $empresa->conf_email,
 					"addReplyToName" => $empresa->conf_nombres,
 					"addAddress" => $mails,
-					"Subject" => "Expediente Creado",
+					"Subject" => "Expediente ".$estado,
 					"Body" => $body,
 					"AltBody" => "pruebas de html"
 				);
@@ -1051,7 +1050,7 @@ class Expedientes extends MY_Controller
 
 		$this->load->model("Model_tramite");
 		$tramite = $this->Model_tramite->getTramite($id);
-		$this->enviar_mensaje_correo($tramite->tram_expe_id, 'RECHAZADO', $tramite->tram_ofic_ini);
+		$this->enviar_mensaje_correo($tramite->tram_expe_id, 'RECHAZADO', $tramite->tram_user_ini);
 
 
 		if ($this->Model_general->guardar_edit_registro("tramite", $datos, $where) != FALSE) {
@@ -1244,7 +1243,7 @@ class Expedientes extends MY_Controller
 
 
 
-		$this->enviar_mensaje_correo($this->input->post('expediente'), 'DERIVADO', $this->input->post('oficina'));
+		
 
 
 		/* Upload file */
@@ -1285,7 +1284,7 @@ class Expedientes extends MY_Controller
 
 		foreach ($users as $item) {
 			$datos_tramite["tram_user_fin"] = $item->usua_id;
-
+			$this->enviar_mensaje_correo($this->input->post('expediente'), 'DERIVADO', $item->usua_id);
 			if ($this->Model_general->guardar_registro("tramite", $datos_tramite) != FALSE) :
 				$json['exito'] = true;
 			else :
@@ -1353,7 +1352,7 @@ class Expedientes extends MY_Controller
 
 		foreach ($users as $item) {
 			$datos_tramite["tram_user_fin"] = $item->usua_id;
-
+			$this->enviar_mensaje_correo($this->input->post('expediente'), 'DERIVADO', $item->usua_id);
 			if ($this->Model_general->guardar_registro("tramite", $datos_tramite) != FALSE) :
 				$json['exito'] = true;
 			else :
@@ -1364,7 +1363,7 @@ class Expedientes extends MY_Controller
 		//}
 		//
 
-		$this->enviar_mensaje_correo($this->input->post('expediente'), 'DERIVADO', $this->input->post('oficina'));
+		
 
 
 		//i/f ($this->Model_general->guardar_registro("tramite", $datos_tramite) != FALSE) :
