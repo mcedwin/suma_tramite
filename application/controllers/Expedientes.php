@@ -783,7 +783,7 @@ class Expedientes extends MY_Controller
 							"tram_fechareg" => date("Y-m-d H:i:s"),
 							"tram_fechaestado" => date("Y-m-d H:i:s")
 						);
-						//$this->enviar_mensaje_correo($expediente["id"], 'DERIVADO', $value);
+						$this->enviar_mensaje_correo($expediente["id"], 'DERIVADO', $item->usua_id);
 
 						if ($this->Model_general->guardar_registro("tramite", $datos_tramite) != FALSE) :
 							$json['exito'] = true;
@@ -796,7 +796,7 @@ class Expedientes extends MY_Controller
 			}
 
 
-
+/*
 			$this->load->model("Model_empresa");
 			$empresa = $this->Model_empresa->getempresa(array("conf_id" => 1));
 			if ($empresa->conf_enviaremail == "SI") :
@@ -835,18 +835,18 @@ class Expedientes extends MY_Controller
 					$this->enviar_email($email);
 				endif;
 			endif;
-
-		else :
+*/
+		else:
 			$json['exito'] = false;
 			$json['mensaje'] = "Error al guardar los datos";
 		endif;
 		echo json_encode($json);
 	}
 
-	function enviar_mensaje_correo($expediente, $estado, $oficina)
+	function enviar_mensaje_correo($expediente, $estado, $userid)
 	{
 		$this->load->model("Model_usuario");
-		$usuarios = $this->Model_usuario->getUsuario(array("usua_ofic_id" => $oficina), 1);
+		$usuarios = $this->Model_usuario->getUsuario(array("usua_id" => $userid), 1);
 
 		$mails = [];
 		foreach ($usuarios as $user) {
